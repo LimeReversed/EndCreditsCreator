@@ -12,15 +12,15 @@ namespace EndCredits
         public bool Execute()
         {
 
-            var endCredits = new EndCredits(CPH);
+            var endCredits = new EndCreditsPlugin(CPH);
             return endCredits.Execute();
         }
     }
 
-    public class EndCredits
+    public class EndCreditsPlugin
     {
         protected IInlineInvokeProxy _cph;
-        public EndCredits(IInlineInvokeProxy cph)
+        public EndCreditsPlugin(IInlineInvokeProxy cph)
         {
             _cph = cph;
         }   
@@ -101,74 +101,85 @@ namespace EndCredits
 
     public class Section
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
         public List<string> Names { get; set; } = new List<string>();
+
+        public Section(string title, List<string> names)
+        {
+            Title = title;
+            Names = names;
+        }
+
+        public Section() 
+        {
+            
+        }
     }
 
     public class SectionCollector
     {
-        public Section hypeTrainConductors = null;
-        public Section hypeTrainContributors = null;
-        public Section eventsCheerers = null;
-        public Section eventsSubscribers = null;
-        public Section eventsReSubscribers = null;
-        public Section eventsGiftSubscribers = null;
-        public Section eventsGiftBombers = null;
-        public Section eventsRaids = null;
-        public Section eventsRewardRedemptions = null;
-        public Section eventsGoalContributions = null;
-        public Section eventsGameUpdates = null;
-        public Section eventsHypeTrains = null;
-        public Section chatEditors = null;
-        public Section chatModerators = null;
-        public Section chatSubscribers = null;
-        public Section chatVips = null;
-        public Section chatUsers = null;
-        public Section topAllTimeTopBitDonors = null;
-        public Section topTopBitDonorsThisMonth = null;
-        public Section topTopBitDonorsThisWeek = null;
-        public Section topTopChannelRewardsRedeemers = null;
-        public Section sponsors = null;
+        public Section hypeTrainConductors = new Section();
+        public Section hypeTrainContributors = new Section();
+        public Section eventsCheerers = new Section();
+        public Section eventsSubscribers = new Section();
+        public Section eventsReSubscribers = new Section();
+        public Section eventsGiftSubscribers = new Section();
+        public Section eventsGiftBombers = new Section();
+        public Section eventsRaids = new Section();
+        public Section eventsRewardRedemptions = new Section();
+        public Section eventsGoalContributions = new Section();
+        public Section eventsGameUpdates = new Section();
+        public Section eventsHypeTrains = new Section();
+        public Section chatEditors = new Section();
+        public Section chatModerators = new Section();
+        public Section chatSubscribers = new Section();
+        public Section chatVips = new Section();
+        public Section chatUsers = new Section();
+        public Section topAllTimeTopBitDonors = new Section();
+        public Section topTopBitDonorsThisMonth = new Section();
+        public Section topTopBitDonorsThisWeek = new Section();
+        public Section topTopChannelRewardsRedeemers = new Section();
+        public Section sponsors = new Section();
 
         public SectionCollector(CreditsData credits)
         {
-            hypeTrainConductors = new Section { Title = "Conductors", Names = credits.HypeTrain.Conductors };
-            hypeTrainContributors = new Section { Title = "Contributors", Names = credits.HypeTrain.Contributors };
-            eventsCheerers = new Section { Title = "Cheerers", Names = credits.Events.Cheers };
-            eventsSubscribers = new Section { Title = "Subscribers", Names = credits.Events.Subs };
-            eventsReSubscribers = new Section { Title = "ReSubscribers", Names = credits.Events.ReSubs };
-            eventsGiftSubscribers = new Section { Title = "Gift Subscribers", Names = credits.Events.GiftSubs };
-            eventsGiftBombers = new Section { Title = "Gift Bombers", Names = credits.Events.GiftBombs };
-            eventsRaids = new Section { Title = "Raiders", Names = credits.Events.Raided };
-            eventsRewardRedemptions = new Section { Title = "Redeemers", Names = credits.Events.RewardRedemptions };
-            eventsGoalContributions = new Section { Title = "Goal Contributions", Names = credits.Events.GoalContributions };
-            eventsGameUpdates = new Section { Title = "Game Updates", Names = credits.Events.GameUpdates };
-            eventsHypeTrains = new Section { Title = "Hype Trains", Names = credits.Events.HypeTrains };
-            chatEditors = new Section { Title = "Editors", Names = credits.Users.Editors };
-            chatModerators = new Section { Title = "Moderators", Names = credits.Users.Moderators };
-            chatSubscribers = new Section { Title = "Subscribers", Names = credits.Users.Subscribers };
-            chatVips = new Section { Title = "VIPs", Names = credits.Users.Vips };
-            chatUsers = new Section { Title = "Users", Names = credits.Users.Users };
-            topAllTimeTopBitDonors = new Section { Title = "All Time Top Bit Donors", Names = credits.Top.AllBits };
-            topTopBitDonorsThisMonth = new Section { Title = "Top Bit Donors This Month", Names = credits.Top.MonthBits };
-            topTopBitDonorsThisWeek = new Section { Title = "Top Bit Donors This Week", Names = credits.Top.WeekBits };
-            topTopChannelRewardsRedeemers = new Section { Title = "Top Channel Rewards Redeemers", Names = credits.Top.TopChannelRewards };
+            hypeTrainConductors = new Section("Conductors", credits.HypeTrain.Conductors ?? new List<string>());
+            hypeTrainContributors = new Section("Contributors", credits.HypeTrain.Contributors ?? new List<string>());
+            eventsCheerers = new Section("Cheerers", credits.Events.Cheers ?? new List<string>());
+            eventsSubscribers = new Section("Subscribers", credits.Events.Subs ?? new List<string>());
+            eventsReSubscribers = new Section("ReSubscribers", credits.Events.ReSubs ?? new List<string>());
+            eventsGiftSubscribers = new Section("Gift Subscribers", credits.Events.GiftSubs ?? new List<string>());
+            eventsGiftBombers = new Section("Gift Bombers", credits.Events.GiftBombs ?? new List<string>());
+            eventsRaids = new Section("Raiders", credits.Events.Raided ?? new List<string>());
+            eventsRewardRedemptions = new Section("Redeemers", credits.Events.RewardRedemptions ?? new List<string>());
+            eventsGoalContributions = new Section("Goal Contributions", credits.Events.GoalContributions ?? new List<string>());
+            eventsGameUpdates = new Section("Game Updates", credits.Events.GameUpdates ?? new List<string>());
+            eventsHypeTrains = new Section("Hype Trains", credits.Events.HypeTrains ?? new List<string>());
+            chatEditors = new Section("Editors", credits.Users.Editors ?? new List<string>());
+            chatModerators = new Section("Moderators", credits.Users.Moderators ?? new List<string>());
+            chatSubscribers = new Section("Subscribers", credits.Users.Subscribers ?? new List<string>());
+            chatVips = new Section("VIPs", credits.Users.Vips ?? new List<string>());
+            chatUsers = new Section("Users", credits.Users.Users ?? new List<string>());
+            topAllTimeTopBitDonors = new Section("All Time Top Bit Donors", credits.Top.AllBits ?? new List<string>());
+            topTopBitDonorsThisMonth = new Section("Top Bit Donors This Month", credits.Top.MonthBits ?? new List<string>());
+            topTopBitDonorsThisWeek = new Section("Top Bit Donors This Week", credits.Top.WeekBits ?? new List<string>());
+            topTopChannelRewardsRedeemers = new Section("Top Channel Rewards Redeemers", credits.Top.TopChannelRewards ?? new List<string>());
             var sponsorsSet = new HashSet<string>();
 
-            sponsorsSet.UnionWith(hypeTrainConductors.Names);
-            sponsorsSet.UnionWith(hypeTrainContributors.Names);
-            sponsorsSet.UnionWith(eventsCheerers.Names);
-            sponsorsSet.UnionWith(eventsSubscribers.Names);
-            sponsorsSet.UnionWith(eventsReSubscribers.Names);
-            sponsorsSet.UnionWith(eventsGiftSubscribers.Names);
-            sponsorsSet.UnionWith(eventsGiftBombers.Names);
-            sponsorsSet.UnionWith(eventsHypeTrains.Names);
-            sponsorsSet.UnionWith(chatSubscribers.Names);
-            sponsorsSet.UnionWith(topTopBitDonorsThisMonth.Names);
+            sponsorsSet.UnionWith(hypeTrainConductors?.Names);
+            sponsorsSet.UnionWith(hypeTrainContributors?.Names);
+            sponsorsSet.UnionWith(eventsCheerers?.Names);
+            sponsorsSet.UnionWith(eventsSubscribers?.Names);
+            sponsorsSet.UnionWith(eventsReSubscribers?.Names);
+            sponsorsSet.UnionWith(eventsGiftSubscribers?.Names);
+            sponsorsSet.UnionWith(eventsGiftBombers?.Names);
+            sponsorsSet.UnionWith(eventsHypeTrains?.Names);
+            sponsorsSet.UnionWith(chatSubscribers?.Names);
+            sponsorsSet.UnionWith(topTopBitDonorsThisMonth?.Names);
 
             var sponsorsList = sponsorsSet.ToList();
 
-            sponsors = new Section { Title = "Sponsors", Names = sponsorsList };
+            sponsors = new Section("Sponsors", sponsorsList);
         }
     }
 
@@ -228,7 +239,8 @@ namespace EndCredits
             string result = null;
             foreach (string item in list)
             {
-                if (namesToExclude == null || !namesToExclude.Contains(item))
+                bool shouldAdd = namesToExclude == null || (namesToExclude != null && !namesToExclude.Contains(item));
+                if (shouldAdd)
                 {
                     result += $"{item}\n";
                 }
