@@ -166,20 +166,20 @@ namespace EndCredits
             topTopChannelRewardsRedeemers = new Section("Top Channel Rewards Redeemers", credits.Top.TopChannelRewards ?? new List<string>());
             var sponsorsSet = new HashSet<string>();
 
-            sponsorsSet.UnionWith(hypeTrainConductors?.Names);
-            sponsorsSet.UnionWith(hypeTrainContributors?.Names);
-            sponsorsSet.UnionWith(eventsCheerers?.Names);
-            sponsorsSet.UnionWith(eventsSubscribers?.Names);
-            sponsorsSet.UnionWith(eventsReSubscribers?.Names);
-            sponsorsSet.UnionWith(eventsGiftSubscribers?.Names);
-            sponsorsSet.UnionWith(eventsGiftBombers?.Names);
-            sponsorsSet.UnionWith(eventsHypeTrains?.Names);
-            sponsorsSet.UnionWith(chatSubscribers?.Names);
-            sponsorsSet.UnionWith(topTopBitDonorsThisMonth?.Names);
+            sponsorsSet.UnionWith(hypeTrainConductors.Names);
+            sponsorsSet.UnionWith(hypeTrainContributors.Names);
+            sponsorsSet.UnionWith(eventsCheerers.Names);
+            sponsorsSet.UnionWith(eventsSubscribers.Names);
+            sponsorsSet.UnionWith(eventsReSubscribers.Names);
+            sponsorsSet.UnionWith(eventsGiftSubscribers.Names);
+            sponsorsSet.UnionWith(eventsGiftBombers.Names);
+            sponsorsSet.UnionWith(eventsHypeTrains.Names);
+            sponsorsSet.UnionWith(chatSubscribers.Names);
+            //sponsorsSet.UnionWith(topTopBitDonorsThisMonth.Names);
 
             var sponsorsList = sponsorsSet.ToList();
 
-            sponsors = new Section("Sponsors", sponsorsList);
+            sponsors = new Section("Today's Sponsors", sponsorsList);
         }
     }
 
