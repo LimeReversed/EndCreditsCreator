@@ -53,9 +53,9 @@ namespace EndCredits
     {
         public int LineCount { get; set; }
         public string CreditsString { get; set; } = "                         \n";
-        protected HashSet<string> _namesToExclude = new HashSet<string>
+        protected HashSet<string> _namesToExclude = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            "Streamer.bot", "StreamElements", "Streamlabs", "Nightbot", "Moobot", "DeepBot", "WizeBot", "Fossabot", "PhantomBot", "StreamPuppy", "Muxy", "TwitchAlerts", "TwitchBot", "AnkhBot", "XanBot"
+            "Streamer.bot", "StreamElements", "Streamlabs", "Nightbot", "Moobot", "DeepBot", "WizeBot", "Fossabot", "PhantomBot", "StreamPuppy", "Muxy", "TwitchAlerts", "TwitchBot", "AnkhBot", "XanBot", "Sery_Bot"
         };
 
         private List<Section> _sections = new List<Section>();
@@ -174,8 +174,6 @@ namespace EndCredits
             sponsorsSet.UnionWith(eventsGiftSubscribers.Names);
             sponsorsSet.UnionWith(eventsGiftBombers.Names);
             sponsorsSet.UnionWith(eventsHypeTrains.Names);
-            sponsorsSet.UnionWith(chatSubscribers.Names);
-            //sponsorsSet.UnionWith(topTopBitDonorsThisMonth.Names);
 
             var sponsorsList = sponsorsSet.ToList();
 
@@ -251,6 +249,11 @@ namespace EndCredits
 
         public static string CreateSection(this List<string> list, string title, HashSet<string> namesToExclude = null)
         {
+            if (list.Count == 1 && namesToExclude != null && namesToExclude.Contains(list[0]))
+            {
+                return null;
+            }
+
             string result = null;
             result = $"- {title} -\n";
             result += list.ToCreditString(namesToExclude);
